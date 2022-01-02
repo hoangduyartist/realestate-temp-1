@@ -648,7 +648,8 @@ html, body {
 
 p, address {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
-  opacity: 0.6;
+  /* opacity: 0.6; */
+  opacity: 1;
   line-height: 20px;
 }
 
@@ -909,7 +910,7 @@ ul.check-marks li:before {
 
 .note {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
-  opacity: 0.4;
+  opacity: 0.8;
   font-size: 12px;
   margin: 5px 0;
 }
