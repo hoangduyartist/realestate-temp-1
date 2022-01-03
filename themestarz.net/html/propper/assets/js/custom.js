@@ -122,22 +122,22 @@ $(document).ready(function($) {
 
 //  Form Validation
 
-    $("form .btn[type='submit']").on("click", function(){
-        var button = $(this);
-        var form = $(this).closest("form");
-        button.prepend("<div class='status'></div>");
-        form.validate({
-            submitHandler: function() {
-                $.post("assets/php/email.php", form.serialize(),  function(response) {
-                    //console.log(response);
-                    //$('#form-subscribe .form-contact-status').html(response);
-                    button.find(".status").append(response);
-                    form.addClass("submitted");
-                });
-                return false;
-            }
-        });
-    });
+    // $("form .btn[type='submit']").on("click", function(){
+    //     var button = $(this);
+    //     var form = $(this).closest("form");
+    //     button.prepend("<div class='status'></div>");
+    //     form.validate({
+    //         submitHandler: function() {
+    //             $.post("assets/php/email.php", form.serialize(),  function(response) {
+    //                 //console.log(response);
+    //                 //$('#form-subscribe .form-contact-status').html(response);
+    //                 button.find(".status").append(response);
+    //                 form.addClass("submitted");
+    //             });
+    //             return false;
+    //         }
+    //     });
+    // });
 
     $("[data-background-color-custom]").each(function() {
         $(this).css( "background-color", $(this).attr("data-background-color-custom") );
@@ -198,6 +198,20 @@ $(document).ready(function($) {
         }
     });
 
+    //form contact
+    $('#form-contact').submit(function(e) {
+        e.preventDefault();
+        // alert($('#form-contact-name').val());
+        const cName = $('#form-contact-name').val();
+        const cEmail = $('#form-contact-email').val();
+        const cMessage = $('#form-contact-message').val();
+
+        sendEmail({
+            customerName: cName,
+            customerEmail: cEmail,
+            customerMsg: cMessage,
+        })
+    });
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -224,6 +238,29 @@ $(window).resize(function(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Functions
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// send mail
+
+function sendEmail(inputData) {
+    console.log(inputData);
+    try {
+        Email.send({
+            Host: "smtp.gmail.com",
+            Username : "nguyenhoangduybf@gmail.com",
+            Password : "nguyenhoangduy",
+            To : 'nguyenhoangduy19598@gmail.com',
+            From : "nguyenhoangduybf@gmail.com",
+            Subject : "TamAnhNam",
+            // Body : `${inputData.customerEmail}: ${inputData.customerMsg}`,
+            Body : "Hello",
+            })
+            .then(
+                message => alert("Đã gửi yêu cầu")
+            );
+    } catch (error) {
+        alert(error)
+    }
+}
 
 // Do after resize
 
