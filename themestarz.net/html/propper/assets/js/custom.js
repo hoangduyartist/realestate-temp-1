@@ -205,11 +205,13 @@ $(document).ready(function($) {
         const cName = $('#form-contact-name').val();
         const cEmail = $('#form-contact-email').val();
         const cMessage = $('#form-contact-message').val();
+        const cPhone = $('#form-contact-phone').val();
 
         sendEmail({
             customerName: cName,
             customerEmail: cEmail,
             customerMsg: cMessage,
+            customerPhone: cPhone,
         })
     });
 });
@@ -242,24 +244,53 @@ $(window).resize(function(){
 // send mail
 
 function sendEmail(inputData) {
-    console.log(inputData);
-    try {
-        Email.send({
-            Host: "smtp.gmail.com",
-            Username : "nguyenhoangduybf@gmail.com",
-            Password : "nguyenhoangduy",
-            To : 'nguyenhoangduy19598@gmail.com',
-            From : "nguyenhoangduybf@gmail.com",
-            Subject : "TamAnhNam",
-            // Body : `${inputData.customerEmail}: ${inputData.customerMsg}`,
-            Body : "Hello",
-            })
-            .then(
-                message => alert("Đã gửi yêu cầu")
-            );
-    } catch (error) {
-        alert(error)
-    }
+    // console.log(inputData);
+    // try {
+    //     Email.send({
+    //         Host: "smtp.mailtrap.io",
+    //         Username : "c0fff8201a4c3f",
+    //         Password : "f547454769b215",
+    //         To : 'nguyenhoangduybf@gmail.com',
+    //         From : "gooddeals.vietnam@gmail.com",
+    //         Subject : "KĐT Tam Anh Nam - Yêu cầu liên hệ",
+    //         // Body : `${inputData.customerEmail}: ${inputData.customerMsg}`,
+    //         Body : 
+    //             `
+    //             <html>
+    //                 <p>Hello Gooddeals team,</p>
+    //                 <p>Bạn nhận được 1 yêu cầu tư vấn từ ${inputData.customerName}:</p>
+    //                 <p style="padding:12px;border-left:4px solid #d0d0d0;font-style:italic">
+    //                     <label>Email: ${inputData.customerEmail}</label>
+    //                     <br>
+    //                     <label>Lời nhắn: ${inputData.customerMsg}</label>
+    //                     <p>Trân trọng,<br>Gooddeals team support</p>
+    //                 </p>
+    //             </html>   
+    //             `,
+    //         })
+    //         .then(
+    //             message => alert("Đã gửi yêu cầu")
+    //         );
+    // } catch (error) {
+    //     alert(error)
+    // }
+    const templateParams = {
+        from_name: inputData.customerName,
+        to_name: 'Gooddeals team',
+        to_email: 'gooddeals.vietnam@gmail.com',
+        message: inputData.customerMsg,
+        phone: inputData.customerPhone
+    };
+    
+    // emailjs.send('service_5g7qilh', 'template_s5ha2cf', templateParams, 'user_GYOvsShWX9sfQrHj1B96e') //use your Service ID and Template ID - nhdbf
+    emailjs.send('service_b6xrnaa', 'template_ou0bo1b', templateParams, 'user_sTB6wxr0BDO3hsXJlDVxa') //use your Service ID and Template ID - gd
+        .then(function(response) {
+           console.log('SUCCESS!', response.status, response.text);
+           alert("Đã gửi yêu cầu");
+        }, function(error) {
+           console.log('FAILED...', error);
+           alert("Yêu cầu lỗi");
+        });
 }
 
 // Do after resize
