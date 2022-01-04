@@ -3619,3 +3619,39 @@ form .status i {
     margin-left: 0;
   }
 }
+
+.phone-position {
+  /* position: -webkit-sticky;
+  position: sticky;
+  top: 0; */
+}
+
+.phone-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.phone-container .phone-number {
+  border-radius: 12px;
+  padding: 8px;
+  background-color: black;
+  color: white;
+  margin-right: 8px;
+}
+
+.phone-container .phone-icon {
+  padding: 16px;
+  /* background-color: rgb(45 45 46); */
+  background-color: white;
+  border: 1.5px solid;
+  border-radius: 50%;
+  width: max-content;
+  cursor: pointer;
+}
+
+.phone-icon img {
+  width: 22px;
+  height: 22px;
+}

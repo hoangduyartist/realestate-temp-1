@@ -88,7 +88,8 @@ $(document).ready(function($) {
                     youtube: {
                         index: 'youtube.com/',
                         id: 'v=',
-                        src: '//www.youtube.com/embed/%id%?autoplay=1'
+                        // src: '//www.youtube.com/embed/%id%?autoplay=1',
+                        src: 'https://www.youtube.com/embed/%id%'
                     },
                     vimeo: {
                         index: 'vimeo.com/',
